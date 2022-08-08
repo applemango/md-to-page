@@ -1,0 +1,48 @@
+@import url('https://fonts.googleapis.com/css2?family=Fira+Code&display=swap');
+.h1 {
+    color: #252525;
+}
+
+.p {
+    font-size: 18px;
+    margin: 0;
+}
+
+.code > code {
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+    background-color: #252525;
+    color: #abb2bf;
+    padding: 2px;
+    border-radius: 3px;
+}
+span > .code > code {
+    font-size: 16px;
+    background: none;
+    color: inherit;
+    padding: 0;
+    border-radius: 0;
+}
+.code_font > code {
+    font-size: 13px;
+    font-family: 'Fira Code', monospace;
+}
+
+.link {
+    color: #0070f3;
+}
+.link:not(h1 .link) {
+    font-size: 18px;
+}
+.link:hover {
+    text-decoration: underline;
+}
+
+.link_back {
+    text-decoration: underline;
+    color: #555;
+}
+
+.underline {
+    text-decoration: underline;
+}
