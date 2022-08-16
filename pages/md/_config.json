@@ -11,4 +11,8 @@
         "public": true
         ,"details":"simple markdown editor"
     }
+    ,"syntax": {
+        "public": true
+        ,"details":"markdown syntax"
+    }
 }

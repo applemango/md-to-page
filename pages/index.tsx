@@ -2,7 +2,7 @@ import type { NextPage } from 'next'
 import { useRouter } from 'next/router'
 import { useState, useEffect } from "react"
 import styles from '../styles/Home.module.scss'
-import Header from "../lib/header"
+import Header from "../lib/components/header"
 
 import Link from 'next/link'
 

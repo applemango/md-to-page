@@ -1,4 +1,4 @@
-import { render_sub, render_code, render_json_ } from "./render_"
+import { render_sub, render_code, render_json_, render_math, render_info } from "./render_"
 import styles from "./span_styles.module.scss"
 
 export function Md_render(d: any) {
@@ -69,6 +69,45 @@ export function Md_render(d: any) {
                 }
             } catch (e) {
             }
+        }
+
+        if((now == "```math" || now == "```math\r") && (data_array.includes("```") || data_array.includes("```\r"))) {
+            let t = ""
+            let s = 0;
+            data_array.shift()
+            while ((data_array[0] != "```" && data_array[0] != "```\r") || !(s < 100000)) {
+                t = t+data_array[0]
+                data_array.shift()
+                s++
+            }
+            data_array.shift()
+            result.push(render_math(t))
+            isShift = true
+            isChange = true
+            continue;
+        }
+
+        if(now.slice(0,3) == ":::") {
+            let t = [];
+            let n = false;
+            let s = 0;
+            let b = false;
+            let type = now.slice(3,-1)
+            data_array.shift()
+            while ((data_array[0] != ":::" && data_array[0] != ":::\r") || n && !(s < 100000)) {
+                if(data_array.length < 1) {b = true;break}
+                t.push(data_array[0])
+                data_array.shift()
+                s++
+            }
+            if(b) {
+                break
+            }
+            data_array.shift()
+            result.push(render_info(t, type))
+            isShift = true
+            isChange = true
+            continue;
         }
 
         if (!isChange && !isShift) {

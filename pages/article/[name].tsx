@@ -10,7 +10,8 @@ import Link from 'next/link'
 
 import Head from 'next/head'
 
-import Code from "../../lib/code"
+
+import Code from "../../lib/components/code"
 import 'highlight.js/styles/atom-one-dark.css';
 import highlight from 'highlight.js/lib/core';
 import python from 'highlight.js/lib/languages/python';highlight.registerLanguage('python', python);

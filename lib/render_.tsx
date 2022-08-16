@@ -1,7 +1,12 @@
-import Code from "./code"
+import Code from "./components/code"
+import Colors from "./components/Colors"
 import styles from "./span_styles.module.scss"
 
 import Link from "next/link"
+import Image from "next/image"
+
+import 'katex/dist/katex.min.css';
+import { InlineMath, BlockMath } from 'react-katex';
 
 export function render_sub(type: string, data:any) {
     if(type == "#") {
@@ -41,13 +46,19 @@ export function render_json_(type:any, data:string) {
         if(type.type == "back") {
             return <Link href="/"><a className = {styles.link_back}>back</a></Link>
         }
+        if(type.type == "image" && type.link && type.size) {
+            return  <Image src={type.link} width = {type.size[0]} height = {type.size[1]} />
+        }
+        if(type.type == "color" && type.color) {
+            return  <Colors colors={type.color} />
+        }
     } catch (e) {
         return false
     }
 }
 
 export function render_text(data:string, special?:boolean, test?:any):any {
-    const l = [ "*", "_", "`"]
+    const l = [ "*", "_", "`", "~", "$"]
     for (let i = 0; i < data.length; i++) {
         if (l.includes(data[i])) {
             const first = data.indexOf(data[i])
@@ -55,7 +66,7 @@ export function render_text(data:string, special?:boolean, test?:any):any {
             const start = data.slice(0,first)
             const word = data.slice(first+1,second)
             const end = data.slice(second+1)
-            const isSpecial = data[i] == "`" ? true : false
+            const isSpecial = data[i] == "`" || data[i] == "*" ? true : false
             if(first == second) {continue;}
             if(test == data ) {return data}
             if(special) {return (data)}
@@ -68,6 +79,12 @@ export function render_text(data:string, special?:boolean, test?:any):any {
             if(data[i] == "_") {
                 return (<>{start}<span className = { styles.underline }>{render_text(word, isSpecial, data)}</span>{render_text(end, false, data)}</>)
             }
+            if(data[i] == "~") {
+                return (<>{start}<span className = { styles.delete }>{render_text(word, isSpecial, data)}</span>{render_text(end, false, data)}</>)
+            }
+            if(data[i] == "$") {
+                return (<>{start}<InlineMath>{word}</InlineMath>{render_text(end, false, data)}</>)
+            }
         }
     }
     return data
@@ -76,12 +93,19 @@ export function render_text(data:string, special?:boolean, test?:any):any {
 export function render_code(data: Array<string>) {
     let lang:any = []
     let code:any = []
+    let name:any = []
     for (let i = 0; i < data.length; i++) {
         if(data[i].indexOf("```") == 0) {
             if(data[i] == "```\r") {
                 code[lang.length - 1].slice(0, -1)
             } else {
-                lang.push(data[i].split("```")[1].replace("\r",""))
+                const d = data[i].split("```")[1].replace("\r","").split(":")
+                // "```js:test" => "js:test" => ["js","test"]
+                lang.push(d[0])
+                name.push(d[1])
+                if(!d[1]) {
+                    name[name.length - 1] = d[0]
+                }
             }
         } else {
             let a;
@@ -97,7 +121,7 @@ export function render_code(data: Array<string>) {
     if(code.length == 1) {
         return (
             <Code
-                name = {null}
+                name = {name[0]}
                 lang  = {lang[0]}>
                 {code[0]}
             </Code>
@@ -105,9 +129,21 @@ export function render_code(data: Array<string>) {
     }
     return (
         <Code
-            name = {lang}
+            name = {name}
             lang  = {lang}>
             {code}
         </Code>
+    )
+}
+
+export function render_math(data: string) {
+    return (
+        <BlockMath math={data}/>
+    )
+}
+
+export function render_info(data: Array<string>, type: string) {
+    return (
+        <div>{data}</div>
     )
 }
