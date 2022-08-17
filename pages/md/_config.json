@@ -15,4 +15,8 @@
         "public": true
         ,"details":"markdown syntax"
     }
+    ,"a": {
+        "public": false
+        ,"details":""
+    }
 }

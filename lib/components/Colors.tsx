@@ -15,10 +15,12 @@ export default function Colors({colors}:Props) {
             {colors.map((color, index) => (
                 <div style={{
                     width: 100/colors.length+"%"
-                    ,backgroundColor: color
+                    ,backgroundColor: color.indexOf(":") != -1 ? color.slice(0,color.indexOf(":")) : color
                 }}
                     className = { styles.color }
-                >{color}</div>
+                ><p style={{
+                    color: color.indexOf(":") != -1 ? color.slice(color.indexOf(":")+1) : ""
+                }}>{color.indexOf(":") != -1 ? color.slice(0,color.indexOf(":")) : color}</p></div>
             ))}
         </div>
     )

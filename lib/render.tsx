@@ -19,7 +19,7 @@ export function Md_render(d: any) {
         const md_f_data = now.slice(now.indexOf(" ")+1)
         
         if(!now || now == "" || now == "\r") {
-            result.push(<br className = { styles.br }/>)
+            result.push(<div className = { styles.br }/>)
             data_array.shift()
             isShift = true
             isChange = true

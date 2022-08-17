@@ -52,6 +52,10 @@ export function render_json_(type:any, data:string) {
         if(type.type == "color" && type.color) {
             return  <Colors colors={type.color} />
         }
+        if(type.type == "br" && data) {
+            console.log(type,data)
+            return <div style={{height:Number(data)}} className={styles.br} />
+        }
     } catch (e) {
         return false
     }

@@ -55,4 +55,4 @@ hello, world! is bad
 
 {"type":"image","link":"/undefined.png","size":[50,50]} /
 
-{"type":"color","color":["#0070f3","#f30032"]} /
+{"type":"color","color":["#0070f3:#fff","#fff:#000"]} /
