@@ -1,20 +1,20 @@
 import { ReactNode, useState } from 'react'
-import styles from "./colors.module.scss"
+import styles from "./styles/colors.module.scss"
 
 type Props = {
-    colors : string[] | string
+    color : string[] | string
 }
-export default function Colors({colors}:Props) {
-    if(!Array.isArray(colors)) {
+export default function Colors({color}:Props) {
+    if(!Array.isArray(color)) {
         return (
             <div></div>
         )
     }
     return (
         <div className={ styles.main }>
-            {colors.map((color, index) => (
-                <div style={{
-                    width: 100/colors.length+"%"
+            {color.map((color, index) => (
+                <div key = {index} style={{
+                    width: 100/color.length+"%"
                     ,backgroundColor: color.indexOf(":") != -1 ? color.slice(0,color.indexOf(":")) : color
                 }}
                     className = { styles.color }

@@ -1,6 +1,7 @@
 import Code from "./components/code"
-import Colors from "./components/Colors"
-import styles from "./span_styles.module.scss"
+//import Colors from "./components/colors"
+import Info from "./components/info"
+import styles from "./components/styles/span_styles.module.scss"
 
 import Link from "next/link"
 import Image from "next/image"
@@ -32,7 +33,7 @@ export function render_sub(type: string, data:any) {
     }
 }
 
-export function render_json_(type:any, data:string) {
+export function render_json_(type:any, data:string,info?:any) {
     try {
         if(type.type == "link" && type.link) {
             return <Link href = {type.link }><a className={styles.link}>{data}</a></Link>
@@ -46,12 +47,15 @@ export function render_json_(type:any, data:string) {
         if(type.type == "back") {
             return <Link href="/"><a className = {styles.link_back}>back</a></Link>
         }
+        if(type.type == "info") {
+            return <Info info={info} />
+        }
         if(type.type == "image" && type.link && type.size) {
             return  <Image src={type.link} width = {type.size[0]} height = {type.size[1]} />
         }
-        if(type.type == "color" && type.color) {
-            return  <Colors colors={type.color} />
-        }
+        /*if(type.type == "color" && type.color) {
+            return  <Colors color={type.color} />
+        }*/
         if(type.type == "br" && data) {
             console.log(type,data)
             return <div style={{height:Number(data)}} className={styles.br} />

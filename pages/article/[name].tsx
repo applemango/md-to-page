@@ -9,7 +9,7 @@ import DefaultErrorPage from 'next/error'
 import Link from 'next/link'
 
 import Head from 'next/head'
-
+import Heads from "../components/heads"
 
 import Code from "../../lib/components/code"
 import 'highlight.js/styles/atom-one-dark.css';
@@ -25,10 +25,17 @@ import clojure from 'highlight.js/lib/languages/clojure';highlight.registerLangu
 interface Props {
     html: any
     name: string
+    date: string
+    tags: string[]
+    details: string
 }
 export async function getStaticProps(context: any) {
     const name = context.params.name
-    const html = await data(String(context.params.name))
+    const r = await data(String(context.params.name))
+    const html = r.data
+    const date = r.date
+    const tags = r.tags
+    const details = r.seo_details
     if(!html) {
         return {
             notFound: true
@@ -37,6 +44,10 @@ export async function getStaticProps(context: any) {
     return {
         props: {
             html
+            ,name
+            ,date
+            ,tags
+            ,details
         }
     }
 }
@@ -47,14 +58,16 @@ export async function getStaticPaths() {
     }
 }
 
-function Blog({ html }: Props) {
-    useEffect(() => {highlight.initHighlighting();});
+function Blog({ html, name, date, tags, details }: Props) {
+    useEffect(() => {highlight.highlightAll()/*highlight.initHighlighting()*/;});
     return (
         <div className = { styles.main }>
-            <Md_render data={html} />
+            <Heads title = { name } description={details}/>
+            <Md_render data={html} name={name} date={date} tags={tags} />
         </div>
     )
 }
+//<h1>{`name = ${name}, date = ${date}`}</h1>
 /*
             <h1>{name}</h1>
             <Link href="/"><a>back</a></Link>

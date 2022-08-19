@@ -1,4 +1,6 @@
-{"type":"link_h1","link":"/hello,_world!"} hello, world!
+{"type":"link_h1","link":"/article/syntax"} hello, world!
+
+{"type":"info"} /
 
 {"type":"back"} /
 
@@ -56,3 +58,5 @@ hello, world! is bad
 {"type":"image","link":"/undefined.png","size":[50,50]} /
 
 {"type":"color","color":["#0070f3:#fff","#fff:#000"]} /
+
+{"type":"link_h1","link":"/hello,_world!"} hello, world!

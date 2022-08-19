@@ -1,5 +1,5 @@
 import { ReactNode, useState } from 'react'
-import style from "./code.module.scss"
+import style from "./styles/code.module.scss"
 //{ children.length > 0 && children.map((child, index) => (<div></div>))}
 //<pre className = { style.code }><code className = {lang[0]}>{children[0]}</code></pre>
 type Props = {

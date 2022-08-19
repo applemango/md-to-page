@@ -1,5 +1,5 @@
 import { render_sub, render_code, render_json_, render_math, render_info } from "./render_"
-import styles from "./span_styles.module.scss"
+import styles from "./components/styles/span_styles.module.scss"
 
 export function Md_render(d: any) {
     if(!d.data) { return <div></div> }
@@ -59,7 +59,7 @@ export function Md_render(d: any) {
         if(md_f[0] == "{" && md_f[md_f.length - 1] == "}") {
             try {
                 const json = JSON.parse(md_f)
-                const res = render_json_(json, md_f_data)
+                const res = render_json_(json, md_f_data, {"name":d.name, "date":d.date,"tags":d.tags})
                 if(res) {
                     result.push(res)
                     data_array.shift()

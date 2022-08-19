@@ -5,6 +5,9 @@ import { useState, useEffect } from "react"
 import styles from "../styles/editor.module.scss"
 import style from "./article/main.module.scss"
 
+import Head from "next/head"
+import Heads from "./components/heads"
+
 import Code from "../lib/components/code"
 import 'highlight.js/styles/atom-one-dark.css';
 import highlight from 'highlight.js/lib/core';
@@ -28,6 +31,7 @@ export function Editor() {
     },[md,showEditor,showOutput]);
     return (
         <div className = { styles.main }>
+            <Heads title = {"editor"} description={"ぶろぐてきななにかのマークダウンエディター"} />
             { showEditor && (
                     <div className = {` ${styles.textarea} ${showOutput ? "" : styles.textarea_max_width } `}>
                         <textarea value={md} onChange={(event) => {setMd(event.target.value)}}></textarea>
