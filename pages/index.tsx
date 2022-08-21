@@ -37,7 +37,7 @@ export default function Home ({ result }: Props) {
     const router = useRouter()
     const { page } = router.query
     //const onePage = 30
-    const [onePage,setOneCode] = useState(3)
+    const [onePage,setOneCode] = useState(6)
     const nowPage = page == null ? 0 : Number(page)
     const data = page ? result.slice(Number(page)*onePage,(Number(page)+1)*onePage) : result.slice(0,onePage)
     return (

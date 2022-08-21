@@ -12,6 +12,17 @@ body {
 ::-webkit-scrollbar-thumb {background-color: #ccc;border-radius: 3px;}
 ::-webkit-scrollbar-track {background-color: transparent;}
 
+::selection {
+  background-color: #000;
+  color: #fff;
+}
+:is(h1,h2,h3,h4,h5,h6,a)::selection {
+  text-shadow: 0px 0px 5px #fff;
+}
+a::selection {
+  text-decoration: underline;
+}
+
 a {
   color: inherit;
   text-decoration: none;
